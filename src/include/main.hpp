@@ -1,6 +1,5 @@
 #ifndef MAIN
 #define MAIN
-int add(int a, int b) {
-    return a + b;
-}
+int add(int, int);
+void clear_screen();
 #endif
