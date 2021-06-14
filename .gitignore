@@ -37,5 +37,8 @@ cmake_install.cmake
 CMakeCache.txt
 Makefile
 
-#visual studio code plugin thing
+# Visual studio code plugin thing
 compile_commands.json
+
+# Final binary
+game
