@@ -1,4 +1,5 @@
 #include <iostream>
+#include "game.hpp"
 
 #ifdef __linux__
 void clear_screen() {
@@ -12,4 +13,7 @@ void clear_screen() {
 #endif
 void print_err(std::string err) {
     std::cerr << err << std::endl;
+}
+void print_game(const Game &game) {
+
 }
