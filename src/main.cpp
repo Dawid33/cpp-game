@@ -2,21 +2,51 @@
 #include <string>
 #include <variant>
 #include "terminal.hpp"
-#include "events.hpp"
+#include <memory>
+#include "game.hpp"
 
-int main() {
+enum UserAction {
+    Move,
+    None,
+};
+
+struct Command {
+    UserAction action = UserAction::None;
+    std::string* args = NULL;
+};
+
+Command parse_command(std::string);
+std::string get_input();
+
+
+int main(int argc, char** argv) {
     clear_screen();
-    EventManager event_manager = EventManager();
-    while(true) {
-        Event event = event_manager.get_next_event();
-        std::visit([&event_manager](auto event) {
-            using event_t = std::decay_t<decltype(event)>;
-            if (std::is_same_v<event_t, ExitEvent>) {
-                event_manager.should_exit = std::make_shared<bool>(true);
-            } else if (std::is_same_v<event_t, DrawEvent>) {
-                std::cout << "THIS IS THE DRAW EVENT" << std::endl;
+    std::unique_ptr<bool> should_exit = std::make_unique<bool>(false);
+    while (!*should_exit) {
+        Command command = parse_command(get_input());
+        switch (command.action) {
+            case UserAction::Move: {
+                
             }
-            return 0;
-        }, event);
+            case UserAction::None:
+                break;
+            default:
+                print_err("UserAction enum member not covered in switch statment.");
+                *should_exit = true;
+        }
     }
+    // Not exist Here
+    return 0;
+}
+
+std::string get_input() {
+    std::string output = "";
+    return output;
+}
+
+Command parse_command(std::string input) {
+    return Command {
+        .action = UserAction::None,
+        .args = nullptr,
+    };
 }
